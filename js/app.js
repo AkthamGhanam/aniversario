@@ -7,7 +7,7 @@ const CONFIG = {
   // Nombres de los dos. Si lo dejas vacío, la portada dice "Tú & yo".
   nombres: ['', ''],
   // Día en que empezaron (año-mes-día). De aquí sale el contador de la portada.
-  fechaInicio: '2025-11-18T00:00:00',
+  fechaInicio: '2025-11-20T00:00:00',
   // Clave del candado (parada 13). Es la hora que sale escrita en la foto: 8:14.
   clave: '814',
   firma: 'Con todo mi amor, yo.',
