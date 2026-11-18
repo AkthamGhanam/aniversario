@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nuestro Primer Año</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#150826">
+<meta name="description" content="Veinte paradas, treinta y una fotos y un año entero juntos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Caveat:wght@500;700&family=Outfit:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cora" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></symbol>
+  <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M12 4v14m0 0l-6-6m6 6l6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="barra-scroll" aria-hidden="true"><i id="barraScroll"></i></div>
+<canvas id="confeti" aria-hidden="true"></canvas>
+
+<!-- Sello flotante con el progreso -->
+<button class="sello" id="sello" aria-haspopup="dialog" aria-controls="mapa" aria-label="Abrir el mapa de paradas">
+  <svg aria-hidden="true"><use href="#i-cora"/></svg>
+  <span><b id="selloN">0</b>/20</span>
+</button>
+<div class="mapa" id="mapa" role="dialog" aria-label="Mapa de paradas" hidden>
+  <div class="mapa-caja">
+    <header>
+      <h2>Nuestras 20 paradas</h2>
+      <button class="mapa-cerrar" id="mapaCerrar" aria-label="Cerrar">×</button>
+    </header>
+    <ol id="mapaLista"></ol>
+    <label class="mapa-sonido"><input type="checkbox" id="chkSonido" checked> Sonidos</label>
+  </div>
+</div>
+
+<div class="visor" id="visor" hidden>
+  <button class="visor-cerrar" aria-label="Cerrar foto">×</button>
+  <img id="visorImg" alt="">
+</div>
+
+<main>
+
+<!-- 1 ─ PORTADA -->
+<section class="sec t-noche portada" id="s1" data-nombre="El latido">
+  <div class="flotantes" aria-hidden="true"></div>
+  <div class="dentro">
+    <p class="ceja rv">Un año · 365 días · 31 fotos</p>
+    <h1 class="rv">Nuestro<br><em>primer año</em></h1>
+    <p class="pareja rv" id="pareja">Tú &amp; yo</p>
+
+    <div class="portada-escena rv">
+      <figure class="polar lado izq"><img src="fotos/f10.jpg" alt="Los dos sonriendo recostados en el sofá"></figure>
+      <figure class="polar centro"><img src="fotos/f19.jpg" alt="Un beso en la mejilla bajo las luces doradas"></figure>
+      <figure class="polar lado der"><img src="fotos/f18.jpg" alt="Selfie de la noche de gala"></figure>
+      <button class="latido" id="latido" aria-label="Mantén presionado el corazón para empezar">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="anillo-fondo" cx="60" cy="60" r="54"/>
+          <circle class="anillo" id="anillo" cx="60" cy="60" r="54"/>
+          <g transform="translate(24 26) scale(3)"><use href="#i-cora" width="24" height="24"/></g>
+        </svg>
+      </button>
+    </div>
+
+    <p class="pista rv" id="pistaLatido">Mantén presionado el corazón</p>
+
+    <div class="contador" id="contador" hidden>
+      <p>Llevamos juntos</p>
+      <div class="contador-cifras">
+        <div><b id="cD">0</b><span>días</span></div>
+        <div><b id="cH">00</b><span>horas</span></div>
+        <div><b id="cM">00</b><span>min</span></div>
+        <div><b id="cS">00</b><span>seg</span></div>
+      </div>
+    </div>
+    <a class="sig" href="#s2" id="sigPortada" hidden>Empieza a bajar <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 2 ─ GLOBOS -->
+<section class="sec t-lila" id="s2" data-nombre="El hilo y los globos">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 2 de 20</p>
+      <h2>Jala el hilo</h2>
+      <p class="instr" id="globosInstr">Tira del aro hacia abajo y mira lo que cae.</p>
+    </header>
+    <div class="globos rv" id="globos">
+      <div class="hilo" id="hilo">
+        <i class="hilo-cuerda"></i>
+        <button class="hilo-aro" id="hiloAro" aria-label="Jalar el hilo"></button>
+      </div>
+      <div class="globos-marco">
+        <img src="fotos/f30.jpg" alt="Un abrazo apretado con el ramo de flores en la mano" loading="lazy">
+        <div class="globos-tapa"><span>?</span></div>
+        <div class="globos-capa" id="globosCapa"></div>
+      </div>
+    </div>
+    <div class="premio" hidden>
+      <p class="mano">Debajo de todo siempre está este abrazo.</p>
+    </div>
+    <a class="sig" href="#s3">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 3 ─ ROMPECABEZAS -->
+<section class="sec t-noche" id="s3" data-nombre="Rompecabezas">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 3 de 20</p>
+      <h2>Ármanos de nuevo</h2>
+      <p class="instr">Toca dos piezas para intercambiarlas.</p>
+    </header>
+    <div class="puzzle rv" id="puzzle" aria-label="Rompecabezas de 12 piezas"></div>
+    <div class="fila-botones rv">
+      <button class="btn suave" id="puzzleMezclar">Mezclar</button>
+      <button class="btn suave" id="puzzlePista">Ver pista</button>
+      <span class="marcador">Movimientos: <b id="puzzleMov">0</b></span>
+    </div>
+    <div class="premio" hidden>
+      <p class="mano">Encajamos. Siempre lo supe.</p>
+    </div>
+    <a class="sig" href="#s4">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 4 ─ RASCA -->
+<section class="sec t-bosque" id="s4" data-nombre="Rasca y descubre">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 4 de 20</p>
+      <h2>Rasca y descubre</h2>
+      <p class="instr">Frota la tarjeta con el dedo o el ratón.</p>
+    </header>
+    <div class="rasca rv" id="rasca">
+      <img src="fotos/f31.jpg" alt="Selfie de los dos al atardecer, con un árbol detrás" loading="lazy">
+      <canvas id="rascaLienzo" aria-label="Capa para rascar"></canvas>
+    </div>
+    <button class="btn suave rv" id="rascaSaltar">Destapar de una vez</button>
+    <div class="premio" hidden>
+      <p class="mano">Premio mayor: tu cara junto a la mía.</p>
+    </div>
+    <a class="sig" href="#s5">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 5 ─ MEMORIA -->
+<section class="sec t-menta" id="s5" data-nombre="Memoria de filtros">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 5 de 20</p>
+      <h2>Memoria de filtros</h2>
+      <p class="instr">Encuentra las seis parejas. Intentos: <b id="memoIntentos">0</b></p>
+    </header>
+    <div class="memo rv" id="memo"></div>
+    <div class="premio" hidden>
+      <p class="mano">Seis parejas. Ninguna tan buena como la nuestra.</p>
+    </div>
+    <a class="sig" href="#s6">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 6 ─ DIARIO -->
+<section class="sec t-noche" id="s6" data-nombre="El diario">
+  <div class="dentro ancho">
+    <header class="cab rv">
+      <p class="ceja">Parada 6 de 20</p>
+      <h2>El diario de este año</h2>
+      <p class="instr">Voltea cada foto para leer lo que tiene escrito atrás. <b id="diarioN">0</b>/6</p>
+    </header>
+    <div class="diario" id="diario">
+      <i class="diario-linea" aria-hidden="true"><i id="diarioLinea"></i></i>
+    </div>
+    <div class="premio" hidden>
+      <p class="mano">Y todavía faltan muchísimas páginas.</p>
+    </div>
+    <a class="sig" href="#s7">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 7 ─ CARTA -->
+<section class="sec t-bosque" id="s7" data-nombre="La carta">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 7 de 20</p>
+      <h2>Tienes una carta</h2>
+      <p class="instr">Rompe el sello para abrirla.</p>
+    </header>
+    <div class="carta rv" id="carta">
+      <div class="sobre" id="sobre">
+        <i class="sobre-fondo"></i>
+        <i class="sobre-hoja"></i>
+        <i class="sobre-frente"></i>
+        <i class="sobre-solapa"></i>
+        <button class="sobre-sello" id="sobreSello" aria-label="Abrir la carta"><svg aria-hidden="true"><use href="#i-cora"/></svg></button>
+      </div>
+      <article class="papel" id="papel" hidden>
+        <div id="papelTexto"></div>
+        <p class="firma" id="papelFirma"></p>
+      </article>
+    </div>
+    <a class="sig" href="#s8">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 8 ─ ATRAPA -->
+<section class="sec t-noche" id="s8" data-nombre="Atrapa los corazones">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 8 de 20</p>
+      <h2>Atrapa mis corazones</h2>
+      <p class="instr">Mueve la canasta de lado a lado. Necesitas 15.</p>
+    </header>
+    <div class="atrapa rv" id="atrapa">
+      <canvas id="atrapaLienzo"></canvas>
+      <div class="atrapa-hud"><svg aria-hidden="true"><use href="#i-cora"/></svg> <b id="atrapaN">0</b>/15</div>
+      <button class="btn atrapa-jugar" id="atrapaJugar">Jugar</button>
+    </div>
+    <div class="premio" hidden>
+      <p class="mano">Quince atrapados. Los demás ya eran tuyos.</p>
+    </div>
+    <a class="sig" href="#s9">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 9 ─ RULETA -->
+<section class="sec t-lila" id="s9" data-nombre="La ruleta de citas">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 9 de 20</p>
+      <h2>La ruleta de citas</h2>
+      <p class="instr">Gírala. Lo que salga, se cumple.</p>
+    </header>
+    <div class="ruleta rv" id="ruleta">
+      <i class="ruleta-puntero" aria-hidden="true"></i>
+      <div class="ruleta-disco" id="ruletaDisco"></div>
+      <button class="ruleta-centro" id="ruletaGirar">Girar</button>
+    </div>
+    <div class="vale" id="vale" hidden>
+      <p class="vale-ceja">Vale por</p>
+      <p class="vale-texto" id="valeTexto"></p>
+      <p class="vale-pie">Canjeable cuando tú quieras · no caduca</p>
+    </div>
+    <a class="sig" href="#s10">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 10 ─ QUIZ -->
+<section class="sec t-bosque" id="s10" data-nombre="¿Qué filtro era?">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 10 de 20</p>
+      <h2>¿Qué filtro era?</h2>
+      <p class="instr">La foto está borrosa. Adivina cuál filtro teníamos puesto.</p>
+    </header>
+    <div class="quiz rv" id="quiz">
+      <div class="quiz-foto"><img id="quizImg" alt="Foto borrosa por adivinar"></div>
+      <p class="quiz-ronda">Foto <b id="quizRonda">1</b> de 5</p>
+      <div class="quiz-opciones" id="quizOpciones"></div>
+      <p class="quiz-resp" id="quizResp" aria-live="polite"></p>
+      <button class="btn" id="quizSig" hidden>Otra foto</button>
+    </div>
+    <div class="premio" hidden>
+      <p class="mano" id="quizFinal"></p>
+    </div>
+    <a class="sig" href="#s11">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 11 ─ BARAJA -->
+<section class="sec t-noche" id="s11" data-nombre="Caras raras">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 11 de 20</p>
+      <h2>Caras que solo tú conoces</h2>
+      <p class="instr">Desliza cada foto hacia un lado para pasar a la siguiente.</p>
+    </header>
+    <div class="baraja rv" id="baraja">
+      <div class="baraja-fin">
+        <p class="mano">Mi colección favorita. No la cambio por nada.</p>
+        <button class="btn suave" id="barajaOtra">Verlas otra vez</button>
+      </div>
+    </div>
+    <div class="fila-botones rv">
+      <button class="btn redondo" id="barajaIzq" aria-label="Pasar hacia la izquierda">←</button>
+      <span class="marcador"><b id="barajaN">7</b> por ver</span>
+      <button class="btn redondo" id="barajaDer" aria-label="Pasar hacia la derecha">→</button>
+    </div>
+    <a class="sig" href="#s12">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 12 ─ CONSTELACIÓN -->
+<section class="sec t-noche cielo" id="s12" data-nombre="La constelación">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 12 de 20</p>
+      <h2>Nuestra constelación</h2>
+      <p class="instr">Toca las estrellas en orden, del 1 al 12.</p>
+    </header>
+    <div class="constela rv" id="constela">
+      <svg id="constelaSvg" viewBox="0 0 300 280" role="group" aria-label="Doce estrellas numeradas que forman un corazón"></svg>
+    </div>
+    <div class="premio" hidden>
+      <p class="mano">Esa noche el cielo estaba de nuestro lado.</p>
+    </div>
+    <a class="sig" href="#s13">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 13 ─ CANDADO -->
+<section class="sec t-bosque" id="s13" data-nombre="El candado">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 13 de 20</p>
+      <h2>La clave está en la foto</h2>
+      <p class="instr">Tres números abren el candado. Mira bien la imagen.</p>
+    </header>
+    <div class="candado rv" id="candado">
+      <figure class="candado-pista" data-zoom><img src="fotos/f11.jpg" alt="Foto de los dos con una hora escrita encima" loading="lazy"></figure>
+      <div class="candado-cuerpo">
+        <svg class="candado-icono" viewBox="0 0 80 90" aria-hidden="true">
+          <path class="arco" d="M22 44V28a18 18 0 0 1 36 0v16" fill="none" stroke-width="8" stroke-linecap="round"/>
+          <rect class="caja" x="10" y="42" width="60" height="44" rx="10"/>
+        </svg>
+        <div class="diales" id="diales"></div>
+        <button class="btn" id="candadoProbar">Probar clave</button>
+        <p class="candado-msg" id="candadoMsg" aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="premio" hidden>
+      <figure class="marco-premio" data-zoom><img src="fotos/f10.jpg" alt="Los dos sonriendo, recostados juntos" loading="lazy"></figure>
+      <p class="mano">8:14 p. m. La hora que se quedó guardada en nuestra foto.</p>
+    </div>
+    <a class="sig" href="#s14">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 14 ─ LINTERNA -->
+<section class="sec t-noche oscuro" id="s14" data-nombre="La linterna">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 14 de 20</p>
+      <h2>Se fue la luz</h2>
+      <p class="instr">Mueve la linterna y encuentra los 5 corazones escondidos. <b id="linternaN">0</b>/5</p>
+    </header>
+    <div class="linterna rv" id="linterna">
+      <img src="fotos/f07.jpg" alt="Los dos haciendo muecas, él con camiseta morada" loading="lazy">
+      <div class="linterna-sombra" aria-hidden="true"></div>
+    </div>
+    <div class="premio" hidden>
+      <p class="mano">Hasta a oscuras te encuentro.</p>
+    </div>
+    <a class="sig" href="#s15">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 15 ─ SOPA DE LETRAS -->
+<section class="sec t-menta" id="s15" data-nombre="Sopa de letras">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 15 de 20</p>
+      <h2>Sopa de letras</h2>
+      <p class="instr">Arrastra sobre las letras para marcar cada palabra.</p>
+    </header>
+    <div class="sopa rv" id="sopa" aria-label="Sopa de letras"></div>
+    <ul class="sopa-palabras rv" id="sopaPalabras"></ul>
+    <div class="premio" hidden>
+      <p class="mano">Con esas palabras se escribe nuestro año.</p>
+    </div>
+    <a class="sig" href="#s16">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 16 ─ JARDÍN -->
+<section class="sec t-bosque jardin-sec" id="s16" data-nombre="El jardín">
+  <div class="dentro ancho">
+    <header class="cab rv">
+      <p class="ceja">Parada 16 de 20</p>
+      <h2>Riega el jardín</h2>
+      <p class="instr">Toca cada maceta tres veces. Cada flor guarda una foto.</p>
+    </header>
+    <div class="jardin rv" id="jardin"></div>
+    <div class="premio" hidden>
+      <p class="mano">Lo que se cuida, florece. Como nosotros.</p>
+    </div>
+    <a class="sig" href="#s17">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 17 ─ MESA DE POLAROIDS -->
+<section class="sec t-lila" id="s17" data-nombre="La mesa de fotos">
+  <div class="dentro ancho">
+    <header class="cab rv">
+      <p class="ceja">Parada 17 de 20</p>
+      <h2>Hay algo debajo</h2>
+      <p class="instr">Arrastra las fotos y despeja el centro de la mesa.</p>
+    </header>
+    <div class="mesa rv" id="mesa">
+      <div class="mesa-nota" id="mesaNota">
+        <p>Vale por un beso.<br>Cóbralo hoy mismo.</p>
+      </div>
+    </div>
+    <div class="premio" hidden>
+      <p class="mano">Encontraste la nota. El beso va en camino.</p>
+    </div>
+    <a class="sig" href="#s18">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 18 ─ FRASCO -->
+<section class="sec t-menta" id="s18" data-nombre="El frasco de razones">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 18 de 20</p>
+      <h2>El frasco de razones</h2>
+      <p class="instr">Toca el frasco y saca un papelito. Lee por lo menos cinco.</p>
+    </header>
+    <div class="frasco-zona rv">
+      <div class="razon" id="razon" aria-live="polite">
+        <p class="razon-n" id="razonN">Por qué te quiero</p>
+        <p class="razon-texto" id="razonTexto">Aquí adentro hay doce razones. Podrían ser mil.</p>
+      </div>
+      <button class="frasco" id="frasco" aria-label="Sacar un papelito del frasco">
+        <i class="frasco-tapa"></i>
+        <span class="frasco-vidrio" id="frascoVidrio"></span>
+      </button>
+    </div>
+    <div class="premio" hidden>
+      <p class="mano">Puedes seguir sacando. No se acaban.</p>
+    </div>
+    <a class="sig" href="#s19">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 19 ─ PASTEL -->
+<section class="sec t-bosque" id="s19" data-nombre="El pastel">
+  <div class="dentro">
+    <header class="cab rv">
+      <p class="ceja">Parada 19 de 20</p>
+      <h2>Una vela, un deseo</h2>
+      <p class="instr" id="pastelInstr">Primero enciende la vela: tócala.</p>
+    </header>
+    <div class="pastel-zona rv" id="pastelZona">
+      <div class="pastel">
+        <button class="vela" id="vela" aria-label="Encender la vela">
+          <i class="llama"></i><i class="humo"></i><i class="vela-cuerpo"></i>
+        </button>
+        <i class="piso p1"></i>
+        <i class="piso p2"></i>
+        <i class="plato"></i>
+      </div>
+      <form class="deseo" id="deseoForm" hidden>
+        <label for="deseoTxt">Escribe tu deseo. Nadie más lo va a leer.</label>
+        <input id="deseoTxt" type="text" maxlength="80" autocomplete="off" placeholder="Deseo que…">
+        <button class="btn" type="submit">Soplar la vela</button>
+      </form>
+      <p class="deseo-vuela" id="deseoVuela" aria-hidden="true"></p>
+    </div>
+    <div class="premio" hidden>
+      <p class="mano">Deseo enviado. El mío ya se cumplió hace un año.</p>
+    </div>
+    <a class="sig" href="#s20">Siguiente <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  </div>
+</section>
+
+<!-- 20 ─ FINAL -->
+<section class="sec t-noche final" id="s20" data-nombre="El final (por ahora)">
+  <canvas id="fuegos" aria-hidden="true"></canvas>
+  <div class="dentro ancho">
+    <header class="cab rv">
+      <p class="ceja">Parada 20 de 20</p>
+      <h2>Feliz primer año,<br><em>mi amor</em></h2>
+      <p class="instr">Toca el cielo para lanzar fuegos artificiales.</p>
+    </header>
+    <div class="mosaico rv" id="mosaico" aria-label="Todas nuestras fotos formando un corazón"></div>
+    <p class="final-texto rv">Esto fue solo el primer capítulo.<br>Quiero todos los que siguen contigo.</p>
+    <p class="final-cuenta rv">Paradas completadas: <b id="finalN">0</b> de 20</p>
+    <button class="btn suave rv" id="reiniciar">Volver al principio</button>
+  </div>
+</section>
+
+</main>
+
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
